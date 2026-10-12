@@ -6,7 +6,7 @@ ENV NODE_ENV=production \
     WEB_PORT=8787
 
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev && npm install --no-save tsx@4 && npm cache clean --force
+RUN npm ci --omit=dev && npm cache clean --force
 
 COPY tsconfig.json ./
 COPY src ./src
@@ -15,4 +15,4 @@ COPY assets ./assets
 
 VOLUME ["/app/data"]
 EXPOSE 8787
-CMD ["npx", "tsx", "src/index.ts"]
+CMD ["node", "index.js"]

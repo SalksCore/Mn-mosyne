@@ -79,6 +79,10 @@ docker compose logs -f        # pour récupérer le lien du panneau
 
 Les données vivent dans `./data`. Place le panneau derrière un proxy HTTPS (Caddy, Nginx, Traefik) si tu l'ouvres sur Internet.
 
+### Sur Pterodactyl
+
+Egg Node.js, fichier principal `index.js`, image Debian Node 22. Téléverse le zip, décompresse, démarre : le lien du panneau apparaît dans la console. Guide détaillé : [docs/PTERODACTYL.md](docs/PTERODACTYL.md).
+
 ### Variables d'environnement
 
 Toutes sont facultatives : le panneau suffit.
@@ -87,7 +91,7 @@ Toutes sont facultatives : le panneau suffit.
 |---|---|---|
 | `DISCORD_TOKEN` | Token du bot. Sinon, à saisir dans le panneau. | — |
 | `CLIENT_ID` | Identifiant de l'application, détecté depuis le token. | auto |
-| `WEB_PORT` / `WEB_HOST` | Écoute du panneau. | `8787` / `0.0.0.0` |
+| `WEB_PORT` / `WEB_HOST` | Écoute du panneau (sinon `SERVER_PORT` de l'hébergeur). | `8787` / `0.0.0.0` |
 | `PUBLIC_URL` | Adresse du panneau dans les liens envoyés sur Discord. | `http://localhost:8787` |
 | `DATA_DIR` | Dossier des données. | `./data` |
 

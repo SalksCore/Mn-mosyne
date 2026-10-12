@@ -49,11 +49,13 @@ import type { BotConfig, Change, TransportConfig } from "../types.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WEB_DIR = path.resolve(HERE, "../../web");
-const PORT = Number(process.env.WEB_PORT ?? 8787);
+// Pterodactyl et la plupart des hebergeurs imposent leur port via SERVER_PORT.
+const PORT = Number(process.env.WEB_PORT || process.env.SERVER_PORT || 8787);
 const HOST = process.env.WEB_HOST ?? "0.0.0.0";
 
 export function publicUrl(): string {
-  return (process.env.PUBLIC_URL ?? `http://localhost:${PORT}`).replace(/\/+$/, "");
+  const fallback = process.env.SERVER_IP && process.env.SERVER_IP !== "0.0.0.0" ? `http://${process.env.SERVER_IP}:${PORT}` : `http://localhost:${PORT}`;
+  return (process.env.PUBLIC_URL || fallback).replace(/\/+$/, "");
 }
 
 /** Lien d'entree a usage unique vers une page du panneau (15 minutes). */

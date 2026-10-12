@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "description": "Mnémosyne — PRONOTE dans tes messages Discord : brief quotidien en image, alertes en temps réel, sac et trajets. Open source.",
   "type": "module",
-  "main": "src/index.ts",
+  "main": "index.js",
   "scripts": {
-    "start": "tsx src/index.ts",
+    "start": "node index.js",
     "dev": "tsx watch src/index.ts",
     "preview": "tsx src/preview.ts",
     "deploy": "tsx src/deploy-commands.ts",
@@ -20,13 +20,13 @@
     "express": "^5.2.1",
     "node-cron": "^4.6.0",
     "pawnote": "npm:@blockshub/pawnote-lts@1.6.4",
-    "yauzl": "^3.4.0"
+    "yauzl": "^3.4.0",
+    "tsx": "^4.19.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.0",
     "@types/yauzl": "^3.4.0",
-    "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   },
   "engines": {
