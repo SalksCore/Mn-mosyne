@@ -1,0 +1,45 @@
+{
+  "name": "mnemosyne",
+  "version": "2.0.0",
+  "description": "Mnémosyne — PRONOTE dans tes messages Discord : brief quotidien en image, alertes en temps réel, sac et trajets. Open source.",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "preview": "tsx src/preview.ts",
+    "deploy": "tsx src/deploy-commands.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.ts",
+    "samples": "tsx scripts/samples.ts"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^1.0.8",
+    "discord.js": "^14.27.0",
+    "dotenv": "^16.4.5",
+    "express": "^5.2.1",
+    "node-cron": "^4.6.0",
+    "pawnote": "npm:@blockshub/pawnote-lts@1.6.4",
+    "yauzl": "^3.4.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.0",
+    "@types/yauzl": "^3.4.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "pronote",
+    "discord",
+    "bot",
+    "ecole",
+    "gtfs",
+    "transport",
+    "emploi-du-temps"
+  ]
+}
