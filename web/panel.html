@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0e0d11">
+  <title>Mnémosyne · Panneau</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/panel.css">
+  <script>try { if (localStorage.getItem("mnemo-theme") === "light") document.documentElement.dataset.theme = "light"; } catch {}</script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <button class="btn ghost menu-toggle" id="menu" aria-label="Ouvrir le menu" aria-expanded="false">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <a class="brand" href="#accueil" aria-label="Accueil du panneau"><img src="/img/logo-dark.svg" alt="Mnémosyne." width="598" height="110"></a>
+      <span class="product">PANNEAU</span>
+      <span class="spacer"></span>
+      <span class="status-pill" id="pill"><i></i><span>Chargement…</span></span>
+      <button class="btn ghost small" id="logout" title="Se déconnecter du panneau">Quitter</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav class="sidenav" id="nav" aria-label="Sections du panneau"></nav>
+    <main id="main" aria-live="polite"></main>
+  </div>
+  <div class="toasts" id="toasts" role="status"></div>
+
+  <script src="/static/vendor/jsQR.js" defer></script>
+  <script src="/static/pantheon.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0e0d11">
+  <title>Mnémosyne · Accès au panneau</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/panel.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/" aria-label="Mnémosyne"><img src="/img/logo-dark.svg" alt="Mnémosyne." width="598" height="110"></a>
+      <span class="product">PANNEAU</span>
+      <span class="spacer"></span>
+      <span class="status-pill"><i></i><span>Accès privé</span></span>
+    </div>
+  </header>
+
+  <main class="login-page">
+    <section class="login-card">
+      <div class="login-copy" id="copy">
+        <span class="kicker"><i></i>Mnémosyne · la mémoire de l'élève</span>
+        <h1>Entre dans ta Mnémosyne<span class="dot">.</span></h1>
+        <p class="lead">Ton panneau rassemble tous les réglages : connexion PRONOTE, alertes, briefs, sac, trajets et thèmes. Il ne s'ouvre qu'avec un lien personnel.</p>
+      </div>
+
+      <form class="login-form" id="form" autocomplete="off">
+        <div class="stack">
+          <span class="kicker"><i></i>Obtenir un lien</span>
+          <ol>
+            <li>Sur Discord, en message privé avec ton bot : <b>/settings</b> ou <b>/setup</b>.</li>
+            <li>Ou au tout premier démarrage : le lien s'affiche dans la <b>console</b> du bot.</li>
+          </ol>
+        </div>
+        <div id="expired" class="notice warn" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          <span>Ce lien a déjà servi ou a expiré. Demande-en un nouveau avec <b>/settings</b>.</span>
+        </div>
+        <label class="field">
+          <span>Lien ou code d'accès</span>
+          <input type="text" id="code" placeholder="https://…/entrer/xxxxxxxx" required>
+          <small>Valable 15 minutes, utilisable une seule fois. Ensuite, ce navigateur reste connecté 30 jours.</small>
+        </label>
+        <div id="error" class="notice err" hidden></div>
+        <button class="btn primary" type="submit" id="submit">Entrer</button>
+      </form>
+    </section>
+    <p class="login-foot">Open source · tes données restent sur ton installation<span class="dot">.</span></p>
+  </main>
+
+  <script src="/static/pantheon.js"></script>
+  <script>
+    Pantheon.layer(document.getElementById("copy"), { seed: 11 });
+    if (new URLSearchParams(location.search).has("lien")) document.getElementById("expired").hidden = false;
+    document.getElementById("form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const button = document.getElementById("submit");
+      const error = document.getElementById("error");
+      error.hidden = true;
+      button.disabled = true;
+      try {
+        const res = await fetch("/api/entrer", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ code: document.getElementById("code").value }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Accès refusé.");
+        location.href = "/";
+      } catch (err) {
+        error.textContent = err.message;
+        error.hidden = false;
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
