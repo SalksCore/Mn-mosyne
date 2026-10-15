@@ -9,7 +9,7 @@ import { isLinked } from "./pronote/client.js";
  * compteurs : PRONOTE connecté ou non, notifications des dernières 24 h, heures
  * en ligne. Jamais de note, de devoir, de nom ni d'identifiant.
  */
-const EVERY_MS = 5 * 60_000;
+const EVERY_MS = 15 * 60_000;
 const startedAt = Date.now();
 
 const OLYMPE_URL = (process.env.OLYMPE_URL ?? "").replace(/\/$/, "");
