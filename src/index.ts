@@ -39,6 +39,7 @@ import { panelLink, startWebServer } from "./web/server.js";
 import { setBridge, type DiscordStatus } from "./web/bridge.js";
 import { hasAnySession } from "./web/auth.js";
 import type { Change } from "./types.js";
+import { startOlympeStats } from "./olympe.js";
 
 /**
  * Point d'entree. Le panneau web demarre toujours, meme sans token
@@ -210,6 +211,7 @@ setBridge({
 });
 
 startWebServer();
+startOlympeStats();
 
 const token = currentToken();
 if (token) {
